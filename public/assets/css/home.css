@@ -1,0 +1,237 @@
+.welcome-label {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Inicio Search input CSS */
+
+.search-container form {
+    height: 80px;
+    font-size: 0;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.main-search {
+    padding: 0 30px;
+    font-size: 18px;
+    width: 60%;
+    max-width: 800px;
+    height: 80px;
+    border: none;
+    border-radius: 20px 0 0 20px;
+}
+
+.submit-search {
+    cursor: pointer;
+    border: none;
+    background: url("/assets/images/research_unfilled.png") no-repeat center center, var(--main-color3);
+    background-size: 50px;
+    border-radius: 0 20px 20px 0;
+    padding: 15px 25px;
+    display: inline-block;
+    width: 150px;
+    height: 80px;
+}
+
+.submit-search:hover {
+    background: url("/assets/images/research.png") no-repeat center center, var(--main-color4);
+    background-size: 50px;
+}
+
+
+/* FIN Search input CSS */
+
+.header-section {
+    position: relative;
+    text-align: left;
+    z-index: 2;
+    margin-left: 40px;
+}
+
+.litte-header-section {
+    padding-left: 50px;
+}
+
+.header-section svg {
+    position: absolute;
+    left: 10px;
+    top: 40%;
+    width: 140px;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.slider-container {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px 25px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.book-slider, .book-slider2 {
+
+}
+
+.slider {
+    display: flex;
+    overflow: hidden;
+}
+
+.slide {
+    flex: 0 0 calc(100% / 3);
+    max-width: calc(100% / 3);
+    height: 200px;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+
+.book-box {
+    text-align: left;
+}
+
+.book-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+
+}
+
+.book-image {
+    max-width: 180px;
+    margin: 0 auto;
+    margin-bottom: -135px;
+    overflow: hidden;
+    border-radius: 10px;
+    z-index: 1;
+    position: relative;
+    box-shadow: 1px 4px 5px 0px rgba(0,0,0,0.75);
+}
+
+.book-image img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+}
+
+.book-info {
+    padding: 25px 15px;
+    padding-top: 160px;
+    background-color: rgb(32 82 149 / 50%);
+    border-radius: 10px;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 190px;
+}
+
+.book-info ul li {
+    list-style: none;
+    margin-bottom: 7px;
+    color: #dbdbdb;
+}
+
+.seller-icon {
+    height: 30px;
+    padding: 5px 3px;
+}
+
+.seller-comparator {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.seller-comparator a {
+    width: calc(100% / 3 - 5px);
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.seller {
+    display: flex;
+    flex-direction: column;
+    background-color: #b3b3b3;
+    border-radius: 10px;
+
+    cursor: pointer;
+    box-shadow: 4px 4px 5px 0px rgba(0,0,0,0.75);
+}
+.seller:hover {
+    transition: background-color 300ms linear;
+}
+
+.seller-price {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.seller1 {
+    background-color: rgb(2 75 55 / 75%);
+}
+
+.seller1:hover {
+    background-color: rgb(3, 97, 72);
+}
+
+.seller2 {
+    background-color: rgb(13 131 183 / 60%);
+}
+
+.seller2:hover {
+    background-color: rgb(15 164 230 / 60%);
+}
+
+.seller3 {
+    background-color: rgb(157 0 0 / 60%);
+}
+
+.seller3:hover {
+    background-color: rgb(149 16 16);
+}
+
+.sellerTodosTusLibros {
+    background-color: rgb(30 30 30 / 75%);
+}
+
+.sellerTodosTusLibros:hover {
+    background-color: rgb(30 30 30);
+}
+
+.sellerBooksRun {
+    background-color: rgb(13 131 183 / 60%);
+}
+
+.sellerBooksRun:hover {
+    background-color: rgb(15 164 230 / 60%);
+}
+
+.sellerIberLibro {
+    background-color: rgb(157 0 0 / 60%);
+}
+
+.sellerIberLibro:hover {
+    background-color: rgb(149 16 16);
+}
+/* TODO custom arrows
+.slick-prev, .slick-next {
+    position: absolute;
+    top: 50%;
+}
+
+.slick-next {
+    background-image: url("/assets/images/flecha-correcta.png") !important;
+}
+
+.slick-prev {
+    background-image: url("/assets/images/flecha-correcta.png") !important;
+}
+
+*/

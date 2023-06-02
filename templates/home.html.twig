@@ -1,0 +1,159 @@
+{# templates/home.html.twig #}
+
+{% extends 'index.html.twig' %}
+
+{% block title %}Página de inicio{% endblock %}
+
+{% block content %}
+
+<div class="main">
+    {% block header %}
+        {% include 'includes/header.html.twig' %}
+    {% endblock %}
+
+    <div class="main-box">
+        <span class="welcome-label">Bienvenido a BookArk - El arca de los libros</span>
+        <div class="search-container">
+            <form action="./search" method="get">
+                <input id="box-search" class="main-search" name="q" type="text" placeholder="Busca por autor, libro o ISBN" />
+                <input class="submit-search" type="submit" value="Buscar" />
+            </form>
+        </div>
+
+
+        <div class="separator"></div>
+        {% if recommendedBooks %}
+        <h2 class="header-section">Recomendado para ti
+            <svg class="arcShape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 129 23" fill="none" enable-background="new 0 0 129 23" xml:space="preserve">
+            <path fill="none" stroke="#205295" stroke-width="16" stroke-linecap="round" d="M8,15c16.1-4.3,10.8-4,35.2-7.5
+            c16.9,0,15.8-1.2,33.7,0c9.2,0.6,21.9,0,44.1,7.5"></path>
+            </svg>
+        </h2>
+        <div class="slider-container">
+            <div class="book-slider">
+                {% for libro in recommendedBooks %}
+                    <div class="slide">
+                        <div class="book-box">
+                            <div class="book-image">
+                                <img src="{{ libro.imagen }}" height="280" alt="{{ libro.titulo }}" />
+                            </div>
+                            <div class="book-info">
+                                <span class="book-title">{{ libro.titulo }}</span>
+                                <ul>
+                                    <li>Autor: {{ libro.autor }}</li>
+                                    <li>Editorial: {{ libro.editorial }}</li>
+                                    <li>ISBN: {{ libro.isbn }}</li>
+                                </ul>
+                                <div class="seller-comparator">
+                                    {% for provider in libro.providers %}
+                                    {% if provider.buyUrl is defined %} <!-- Sin url de compra significa que no obtuvimos datos de ese Provider -->
+                                    <a href="{{ provider.buyUrl }}" target="_blank">
+                                        {% else %}
+                                        <a href="#">
+                                            {% endif %}
+                                            <div class="seller seller{{ provider.nombre }}">
+                                                <img class="seller-icon" src="./assets/images/logos/{{ provider.nombre }}.svg" alt="{{ provider.nombre }}">
+                                                <span class="seller-price">{{ provider.precio }}</span>
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        <h2 class="header-section litte-header-section">Popular
+            <svg class="arcShape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 129 23" fill="none" enable-background="new 0 0 129 23" xml:space="preserve">
+            <path fill="none" stroke="#205295" stroke-width="16" stroke-linecap="round" d="M8,15c16.1-4.3,10.8-4,35.2-7.5
+            c16.9,0,15.8-1.2,33.7,0c9.2,0.6,21.9,0,44.1,7.5"></path>
+            </svg>
+        </h2>
+        <div class="slider-container">
+            <div class="book-slider2">
+                {% for libro in popularBooks %}
+                    <div class="slide">
+                        <div class="book-box">
+                            <div class="book-image">
+                                <img src="{{ libro.imagen }}" height="280" alt="{{ libro.titulo }}" />
+                            </div>
+                            <div class="book-info">
+                                <span class="book-title">{{ libro.titulo }}</span>
+                                <ul>
+                                    <li>Autor: {{ libro.autor }}</li>
+                                    <li>Editorial: {{ libro.editorial }}</li>
+                                    <li>ISBN: {{ libro.isbn }}</li>
+                                </ul>
+                                <div class="seller-comparator">
+                                    {% for provider in libro.providers %}
+                                    {% if provider.buyUrl is defined %} <!-- Sin url de compra significa que no obtuvimos datos de ese Provider -->
+                                    <a href="{{ provider.buyUrl }}" target="_blank">
+                                        {% else %}
+                                        <a href="#">
+                                            {% endif %}
+                                            <div class="seller seller{{ provider.nombre }}">
+                                                <img class="seller-icon" src="./assets/images/logos/{{ provider.nombre }}.svg" alt="{{ provider.nombre }}">
+                                                <span class="seller-price">{{ provider.precio }}</span>
+                                            </div>
+                                        </a>
+                                        {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    {% block footer %}
+        {% include 'includes/footer.html.twig' %}
+    {% endblock %}
+    <script>
+    $(document).ready(function() {
+        const responsiveConfig = [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ];
+        $('.book-slider').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            responsive: responsiveConfig
+        });
+        $('.book-slider2').slick({
+            infinite: true,
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            responsive: responsiveConfig
+        });
+
+    });
+</script>
+{% endblock %}

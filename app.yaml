@@ -1,0 +1,14 @@
+runtime: php81
+
+handlers:
+  # Recursos estáticos en /public.
+  - url: /(.*\.(gif|png|jpg|jpeg|css|js|ico|txt|svg))
+    static_files: public/\1
+    upload: public/.*\.(gif|png|jpg|jpeg|css|js|ico|txt|svg)$
+
+  # Controlador principal index.php
+  - url: /.*
+    script: public/index.php
+
+env_variables:
+  APP_ENV: prod

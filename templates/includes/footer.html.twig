@@ -1,0 +1,39 @@
+<script>
+    const ph = "Busca por autor, libro o ISBN";
+    const searchBar = document.querySelector('#box-search');
+
+    let phCount = 0;
+
+    const randDelay = (min, max) => {
+        return Math.floor(Math.random() * (max-min+1)+min);
+    };
+
+    const printLetter = (string, el) => {
+        const arr = string.split('');
+        const input = el;
+        const origString = string;
+        const curPlace = input.getAttribute("placeholder");
+        const placeholder = curPlace + arr[phCount];
+
+        setTimeout(() => {
+            input.setAttribute("placeholder", placeholder);
+            phCount++;
+            if (phCount < arr.length) {
+                printLetter(origString, input);
+            }
+        }, randDelay(50, 90));
+    };
+
+    const placeholder = () => {
+        searchBar.setAttribute("placeholder", "");
+        printLetter(ph, searchBar);
+    };
+
+    placeholder();
+
+    $('.submit').click((e) => {
+        phCount = 0;
+        e.preventDefault();
+        placeholder();
+    });
+</script>

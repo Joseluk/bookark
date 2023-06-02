@@ -1,0 +1,36 @@
+.main, body {
+    background-image: linear-gradient(to right, var(--main-color2) , var(--main-color4));
+}
+
+.header {
+    height: 45px;
+    padding: 0 20px;
+    background-color: #89bbf5;
+}
+
+.main-box {
+
+}
+
+.logo img {
+    height: 40px;
+}
+
+.main-box {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    background-color: rgba(0,0,0,0.75);
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    color: var(--white);
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.75);
+    max-width: 950px;
+}
+
+.separator {
+    width: 90%;
+    margin: 40px auto;
+    border-bottom: 1px solid #323232;
+}
