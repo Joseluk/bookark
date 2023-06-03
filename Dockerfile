@@ -19,6 +19,7 @@ EXPOSE 8080
 COPY docker/000-default.conf /etc/apache2/sites-available/
 COPY --from=build /app/vendor /var/www/project/vendor
 COPY . /var/www/project/
+COPY .env /var/www/project/.env
 
 RUN setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var && \
     setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var && \
