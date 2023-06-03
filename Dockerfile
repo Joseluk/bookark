@@ -20,8 +20,8 @@ COPY docker/000-default.conf /etc/apache2/sites-available/
 COPY --from=build /app/vendor /var/www/project/vendor
 COPY . /var/www/project/
 
-RUN setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX var && \
-    setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX var && \
+RUN setfacl -dR -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var && \
+    setfacl -R -m u:"$HTTPDUSER":rwX -m u:$(whoami):rwX /var && \
     echo "Listen 8080" >> /etc/apache2/ports.conf && \
     mkdir -p /var/www/project/var/log/ && \
     mkdir -p /var/www/project/var/cache/ && \
