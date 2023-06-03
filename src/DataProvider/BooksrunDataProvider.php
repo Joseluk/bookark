@@ -2,11 +2,6 @@
 
 namespace App\DataProvider;
 
-use Exception;
-use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class BooksrunDataProvider implements DataProviderInterface
@@ -23,12 +18,10 @@ class BooksrunDataProvider implements DataProviderInterface
         $this->client = $client;
     }
 
-    public function fetchData(string $isbn): array
+    public function fetchData(string $query): array
     {
-        $url = $this->buildUrl($isbn);
-
+        $url = $this->buildUrl($query); // Query es un ISBN siempre para Booksrun
         $response = $this->client->request('GET', $url);
-
         if ($response->getStatusCode() != 200) {
             throw new \Exception("Error: " . $response->getContent());
         }
@@ -36,7 +29,6 @@ class BooksrunDataProvider implements DataProviderInterface
         $data = json_decode($response->getContent(), true);
 
         // Comprobamos si tenemos el status 'success' y si existen ofertas de 'booksrun' y 'new'
-
         if (isset($data['result']['status']) && $data['result']['status'] === 'success' &&
             isset($data['result']['offers']['booksrun']['new']) && $data['result']['offers']['booksrun']['new'] !== 'none') {
 

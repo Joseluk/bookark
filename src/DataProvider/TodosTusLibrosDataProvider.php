@@ -2,15 +2,13 @@
 
 namespace App\DataProvider;
 
-use App\Entity\Book;
-use App\Entity\Provider;
 use App\Utils\WebScraper;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 
-class TodosTusLibrosDataProvider
+class TodosTusLibrosDataProvider implements DataProviderInterface
 {
     private const BASE_URL = 'https://www.todostuslibros.com/';
     private const WEBSCRAP_BUSQUEDA = 'busquedas?keyword=';

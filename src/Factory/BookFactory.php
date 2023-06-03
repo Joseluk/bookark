@@ -7,7 +7,6 @@ use App\DataProvider\IberLibroDataProvider;
 use App\DataProvider\TodosTusLibrosDataProvider;
 use App\Entity\Book;
 use App\Entity\Provider;
-use App\Service\BookRecommendationService;
 use App\Utils\BookFormater;
 
 class BookFactory
@@ -16,21 +15,18 @@ class BookFactory
     private TodosTusLibrosDataProvider $todosTusLibrosDataProvider;
     private IberLibroDataProvider $iberLibroDataProvider;
     private BookFormater $bookFormater;
-    private BookRecommendationService $bookRecommendationService;
 
     public function __construct(
         BooksrunDataProvider       $booksrunDataProvider,
         TodosTusLibrosDataProvider $todosTusLibrosDataProvider,
         IberLibroDataProvider      $iberLibroDataProvider,
-        BookFormater               $bookFormater,
-        BookRecommendationService  $bookRecommendationService
+        BookFormater               $bookFormater
     )
     {
         $this->booksrunDataProvider = $booksrunDataProvider;
         $this->todosTusLibrosDataProvider = $todosTusLibrosDataProvider;
         $this->iberLibroDataProvider = $iberLibroDataProvider;
         $this->bookFormater = $bookFormater;
-        $this->bookRecommendationService = $bookRecommendationService;
     }
 
     public function queryBooks(string $query): array

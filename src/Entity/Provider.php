@@ -74,7 +74,4 @@ class Provider
         return $this;
     }
 
-
-
-
 }

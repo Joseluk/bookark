@@ -65,35 +65,6 @@ class WebScraper {
         ];
     }
 
-    public function extractTop100BooksDataTodosTusLibros(): array
-    {
-        $books = [];
-
-        $this->crawler->filter('#home-bestsellers .book-col')->each(function (Crawler $node, $i) use (&$books) {
-            $title = $node->filter('.book-details h2.title a')->text();
-            $author = $node->filter('.book-details h3.author a')->text();
-            $image = $node->filter('.book-image img')->attr('src');
-            $isbn = str_replace("-", "", $node->filter('.book-details p.data')->first()->text());
-            $editorial = $node->filter('.book-details p.data a')->text();
-            $buyUrl = $node->filter('.book-details h2.title a')->attr('href');
-
-
-            $books[] = [
-                'titulo' => $title,
-                'autor' => $author,
-                'image' => $image,
-                'isbn' => $isbn,
-                'precio' => $price,
-                'editorial' => $editorial,
-                'buyUrl' => $buyUrl,
-                'provider' => self::PROVIDER_TODOS_TUS_LIBROS
-            ];
-        });
-
-        return $books;
-    }
-
-
     public function extractSingleBookDataIberLibro(): array
     {
         try {
@@ -129,7 +100,6 @@ class WebScraper {
             'provider' => self::PROVIDER_IBER_LIBRO
         ];
     }
-
 
     public function elementWithIdExists(string $id): bool {
         return $this->crawler->filter("#{$id}")->count() > 0;

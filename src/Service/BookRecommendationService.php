@@ -2,8 +2,6 @@
 
 namespace App\Service;
 
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 class BookRecommendationService {
@@ -17,18 +15,25 @@ class BookRecommendationService {
     public function storeBookSearch(array $books): void
     {
         $session = $this->requestStack->getCurrentRequest()->getSession();
-
         $previousSearches = $session->get('book_searches', []);
 
-        $session->set('book_searches', array_merge($previousSearches, $books));
+        $indexedNewBooks = [];
+        foreach ($books as $book) {
+            $indexedNewBooks[$book['isbn']] = $book;
+        }
+
+        $indexedPreviousSearches = [];
+        foreach ($previousSearches as $book) {
+            $indexedPreviousSearches[$book['isbn']] = $book;
+        }
+
+        $session->set('book_searches', array_merge($indexedNewBooks, $indexedPreviousSearches));
     }
 
     public function getPreviousSearches(): array
     {
         $session = $this->requestStack->getCurrentRequest()->getSession();
-
         $previousSearches = $session->get('book_searches', []);
-
         $ramdomKeys = (count($previousSearches) > 9) ? array_rand($previousSearches, 9) : array_keys($previousSearches);
 
         return array_intersect_key($previousSearches, array_flip($ramdomKeys));

@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Exception\ExceptionInterface;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 
@@ -19,7 +20,7 @@ class SearchController extends AbstractController
 
     /**
      * @param BookFactory $bookFactory
-     * @param Serializer $serializer
+     * @param BookRecommendationService $bookRecommendationService
      */
     public function __construct(BookFactory $bookFactory, BookRecommendationService $bookRecommendationService)
     {
@@ -29,9 +30,9 @@ class SearchController extends AbstractController
         $this->serializer = new Serializer($normalizers);
     }
 
-
     /**
      * @Route("/search", name="search")
+     * @throws ExceptionInterface
      */
     public function search(Request $request): Response
     {

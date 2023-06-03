@@ -2,15 +2,13 @@
 
 namespace App\DataProvider;
 
-use App\Entity\Book;
-use App\Entity\Provider;
 use App\Utils\WebScraper;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 
-class IberLibroDataProvider
+class IberLibroDataProvider implements DataProviderInterface
 {
     private const PROVIDER_NAME = "IberLibro";
     private const API_BASE_URL = 'https://www.iberlibro.com/servlet/SearchResults?kn=';

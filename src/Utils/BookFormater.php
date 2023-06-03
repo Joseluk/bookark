@@ -5,18 +5,6 @@ namespace App\Utils;
 class BookFormater
 {
     /**
-     * Elimina los guiones de un ISBN.
-     *
-     * @param string $isbn
-     * @return string
-     */
-    public function formatISBN(string $isbn): string
-    {
-        //return str_replace('-', '', $isbn);
-        return $isbn;
-    }
-
-    /**
      * Reemplaza puntos por comas
      * Añade un símbolo € al final del precio si no está ya presente.
      * Si nos viene a null de la fuente de datos (no existe) mostraremos un guion.
@@ -61,6 +49,20 @@ class BookFormater
         }
 
         return $imageUrl;
+    }
+
+    /**
+     * Elimina los guiones de un ISBN.
+     *
+     * Deshabilitado por el momento aunque se mantiene en caso de querer formatear el ISBN
+     *
+     * @param string $isbn
+     * @return string
+     */
+    public function formatISBN(string $isbn): string
+    {
+        //return str_replace('-', '', $isbn);
+        return $isbn;
     }
 
 }

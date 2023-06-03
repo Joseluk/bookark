@@ -137,7 +137,4 @@ class Book
         return $this;
     }
 
-
-
-
 }
