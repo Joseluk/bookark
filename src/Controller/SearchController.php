@@ -36,11 +36,9 @@ class SearchController extends AbstractController
     public function search(Request $request): Response
     {
         $query = $request->query->get('q');
-        echo "<pre>";
         $results = $this->bookFactory->queryBooks($query);
         $resultadosArray = $this->serializer->normalize($results, null);
         $this->bookRecommendationService->storeBookSearch($resultadosArray);
-        echo "</pre>";
 
         return $this->render('search.html.twig', [
             'query' => $query,

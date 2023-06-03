@@ -34,9 +34,9 @@ class HomeController extends AbstractController
         $normalizers = [new ObjectNormalizer()];
         $serializer = new Serializer($normalizers);
         $popularBooksArray = $serializer->normalize($popularBooks, null);
-//        $recommendedBooks = $this->bookRecommendationService->getRandomBooks();
+        $recommendedBooks = $this->bookRecommendationService->getPreviousSearches();
 
-        return $this->render('home.html.twig', ['recommendedBooks' => [], 'popularBooks' => $popularBooksArray]);
+        return $this->render('home.html.twig', ['recommendedBooks' => $recommendedBooks, 'popularBooks' => $popularBooksArray]);
     }
 
 

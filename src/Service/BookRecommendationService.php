@@ -16,46 +16,21 @@ class BookRecommendationService {
 
     public function storeBookSearch(array $books): void
     {
-        $response = new Response();
+        $session = $this->requestStack->getCurrentRequest()->getSession();
 
-        $previousSearches = $this->getPreviousSearches();
+        $previousSearches = $session->get('book_searches', []);
 
-        foreach($books as $book) {
-            $previousSearches[] = $book;
-        }
-
-        if(count($previousSearches) > 50) {
-            $previousSearches = array_slice($previousSearches, -50);
-        }
-
-        $cookie = new Cookie(
-            'book_searches',
-            json_encode($previousSearches),
-            time() + (2 * 365 * 24 * 60 * 60)
-        );
-
-        $response->headers->setCookie($cookie);
-        $response->send();
+        $session->set('book_searches', array_merge($previousSearches, $books));
     }
 
     public function getPreviousSearches(): array
     {
-        $request = $this->requestStack->getCurrentRequest();
-        if($request->cookies->has('book_searches')) {
-            return json_decode($request->cookies->get('book_searches'), true);
-        }
+        $session = $this->requestStack->getCurrentRequest()->getSession();
 
-        return [];
-    }
+        $previousSearches = $session->get('book_searches', []);
 
-    public function getRandomBooks(): array
-    {
-        $previousSearches = $this->getPreviousSearches();
-        if(count($previousSearches) <= 9) {
-            return $previousSearches;
-        }
+        $ramdomKeys = (count($previousSearches) > 9) ? array_rand($previousSearches, 9) : array_keys($previousSearches);
 
-        $randomKeys = array_rand($previousSearches, 9);
-        return array_intersect_key($previousSearches, array_flip($randomKeys));
+        return array_intersect_key($previousSearches, array_flip($ramdomKeys));
     }
 }
